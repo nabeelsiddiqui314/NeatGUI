@@ -2,24 +2,46 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include <memory>
+#include <unordered_map>
 
 namespace nt {
+	template<typename Resource>
 	class ResourceLoader
 	{
 	public:
-		ResourceLoader();
-		~ResourceLoader();
+		ResourceLoader(const std::string&  folder, const std::string&  extention)
+		: m_folder("./assets/" + folder + "/")
+		, m_extention("." + extention){}
+		~ResourceLoader() {}
 	public:
-		void addTexture(const std::string& filepath, const std::string& name);
-		void addFont(const std::string& filepath, const std::string& name);
-		void addSoundBuffer(const std::string& filepath, const std::string& name);
+		void add(const std::string&  name) {
+			Resource r;
+			if (!r.loadFromFile(getFilename(name)) || exists(name)) {
+				Resource fail;
+				fail.loadFromFile(m_folder + "/fail/FAIL" + m_extention);
+				m_resources.insert(std::make_pair(name, fail));
+			}
+			else m_resources.insert(std::make_pair(name, r));
+		}
 
-		const sf::Texture& getTexture(const std::string& name) const;
-		const sf::Font&    getFont(const std::string& name) const;
-		const sf::SoundBuffer&   getSoundBuffer(const std::string& name) const;
+		Resource& get(const std::string&  name) {
+			if (!exists(name)) {
+				add(name);
+			}
+			return m_resources.at(name);
+		}
 	private:
-		std::map<std::string, sf::Texture> m_textures;
-		std::map<std::string, sf::Font>    m_fonts;
-		std::map<std::string, sf::SoundBuffer>   m_soundBuffers;
+		const std::string getFilename(const std::string&  name) {
+			return (m_folder + name + m_extention);
+		}
+
+		bool exists(const std::string&  name) {
+			return m_resources.find(name) != m_resources.end();
+		}
+	private:
+		std::unordered_map<std::string, Resource> m_resources;
+
+		std::string m_folder;
+		std::string m_extention;
 	};
 }
