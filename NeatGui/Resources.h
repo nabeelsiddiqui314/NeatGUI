@@ -6,8 +6,8 @@
 namespace nt {
 	class Resources
 	{
-	public:
 		Resources();
+	public:
 		~Resources() {}
 	public:
 		static Resources& get();

@@ -9,16 +9,18 @@ namespace nt {
 	class ResourceLoader
 	{
 	public:
-		ResourceLoader(const std::string&  folder, const std::string&  extention)
+		ResourceLoader(const std::string& folder, const std::string& extention)
 		: m_folder("./assets/" + folder + "/")
-		, m_extention("." + extention){}
+		, m_extention("." + extention) {
+			
+		}
 		~ResourceLoader() {}
 	public:
-		void add(const std::string&  name) {
+		void add(const std::string& filepath, const std::string& name) {
 			Resource r;
-			if (!r.loadFromFile(getFilename(name)) || exists(name)) {
+			if (!r.loadFromFile(getFilename(filepath)) || exists(name)) {
 				Resource fail;
-				fail.loadFromFile(m_folder + "/fail/FAIL" + m_extention);
+				fail.loadFromFile(getFilename("/fail/FAIL"));
 				m_resources.insert(std::make_pair(name, fail));
 			}
 			else m_resources.insert(std::make_pair(name, r));
@@ -26,7 +28,9 @@ namespace nt {
 
 		Resource& get(const std::string&  name) {
 			if (!exists(name)) {
-				add(name);
+				Resource fail;
+				fail.loadFromFile(getFilename("/fail/FAIL"));
+				return fail;
 			}
 			return m_resources.at(name);
 		}
@@ -43,5 +47,6 @@ namespace nt {
 
 		std::string m_folder;
 		std::string m_extention;
+		std::string m_filepath;
 	};
 }

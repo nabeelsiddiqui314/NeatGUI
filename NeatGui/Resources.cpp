@@ -5,8 +5,9 @@ namespace nt {
 	Resources::Resources() 
 	: textures("textures", "png")
 	, fonts("fonts", "ttf")
-	, soundBuffers("sounds", "ogg") {
-
+	, soundBuffers("sounds", "wav") 
+	{
+		
 	}
 
 	Resources& Resources::get() {
