@@ -1,6 +1,8 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <array>
+#include "window.h"
+#include "Resources.h"
 
 namespace nt {
 	class Widget
@@ -16,11 +18,12 @@ namespace nt {
 		~Widget();
 	public:
 		bool isClicked();
-		void update();
+		bool isReleaseClicked();
+		void updateTextures();
 		void render();
 	protected:
 		sf::RectangleShape m_body;
-		std::string m_texture;
 		std::array<sf::IntRect, 3> m_texCoords;
+		State m_state = State::INACTIVE;
 	};
 }
