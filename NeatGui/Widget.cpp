@@ -15,7 +15,11 @@ namespace nt {
 	}
 
 	bool Widget::isReleaseClicked() {
-		return false;
+		bool isClkedNow = sf::Mouse::isButtonPressed(sf::Mouse::Left);
+		bool Val;
+		Val = m_clickedLastFrame && !isClkedNow;
+		m_clickedLastFrame = isClkedNow;
+		return Val;
 	}
 
 	void Widget::updateTextures() {
