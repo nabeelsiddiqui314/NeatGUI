@@ -8,10 +8,13 @@ namespace nt {
 		m_body.setTexture(&Resources::get().textures.get(texture));
 	}
 
-	bool Widget::isClicked() {
+	bool Widget::isHovered() {
 		auto mousePos = (sf::Vector2f)sf::Mouse::getPosition(*window::get());
-		return m_body.getGlobalBounds().contains(mousePos) &&
-			   sf::Mouse::isButtonPressed(sf::Mouse::Left);
+		return m_body.getGlobalBounds().contains(mousePos);
+	}
+
+	bool Widget::isClicked() {
+		return isHovered() && sf::Mouse::isButtonPressed(sf::Mouse::Left);
 	}
 
 	bool Widget::isReleaseClicked() {
@@ -19,7 +22,7 @@ namespace nt {
 		bool Val;
 		Val = m_clickedLastFrame && !isClkedNow;
 		m_clickedLastFrame = isClkedNow;
-		return Val;
+		return isHovered() && Val;
 	}
 
 	void Widget::updateTextures() {

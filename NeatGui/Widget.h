@@ -17,14 +17,15 @@ namespace nt {
 		Widget(const std::string& texture, std::array<sf::IntRect, 3> texCoords);
 		~Widget();
 	protected:
+		bool isHovered();
 		bool isClicked();
 		bool isReleaseClicked();
 		void updateTextures();
 		void render();
 	protected:
 		State m_state = State::INACTIVE;
-	private:
 		sf::RectangleShape m_body;
+	private:
 		std::array<sf::IntRect, 3> m_texCoords;
 		bool m_clickedLastFrame = false;
 	};
