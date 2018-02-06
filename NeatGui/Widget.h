@@ -1,5 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include <iostream>
 #include <array>
 #include "window.h"
 #include "Resources.h"
@@ -7,7 +8,7 @@
 namespace nt {
 	class Widget
 	{
-	protected:
+	private:
 		enum class State {
 			INACTIVE,
 			HOVERED,
@@ -16,16 +17,21 @@ namespace nt {
 	public:
 		Widget(const std::string& texture, std::array<sf::IntRect, 3> texCoords);
 		~Widget();
-	protected:
+	public:
+		void update();
+		void render();
 		bool isHovered();
 		bool isClicked();
-		bool isReleaseClicked();
-		void updateTextures();
-		void render();
+		bool isPressed();
+		
+		void setSize(int x, int y);
+		void setPosition(int x, int y);
+		const sf::Vector2f& getSize() const;
+		const sf::Vector2f& getPosition() const;
 	protected:
-		State m_state = State::INACTIVE;
 		sf::RectangleShape m_body;
 	private:
+		State m_state = State::INACTIVE;
 		std::array<sf::IntRect, 3> m_texCoords;
 		bool m_clickedLastFrame = false;
 	};
