@@ -15,14 +15,14 @@ namespace nt {
 			PRESSED
 		};
 	public:
-		Widget(const std::string& texture, std::array<sf::IntRect, 3> texCoords);
-		~Widget();
+		Widget(const std::string& folder);
+		virtual ~Widget();
 	public:
-		void update();
-		void render();
+		virtual void update();
+		virtual void render();
 		bool isHovered();
-		bool isClicked();
 		bool isPressed();
+		bool isClicked();
 		
 		void setSize(int x, int y);
 		void setPosition(int x, int y);
@@ -32,7 +32,7 @@ namespace nt {
 		sf::RectangleShape m_body;
 	private:
 		State m_state = State::INACTIVE;
-		std::array<sf::IntRect, 3> m_texCoords;
+		std::array<std::string, 3> m_paths;
 		bool m_clickedLastFrame = false;
 	};
 }

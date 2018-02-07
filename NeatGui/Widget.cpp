@@ -2,10 +2,14 @@
 #include "Widget.h"
 
 namespace nt {
-	Widget::Widget(const std::string& texture, std::array<sf::IntRect, 3> texCoords)
-		: m_texCoords(texCoords) 
+	Widget::Widget(const std::string& folder)
+		: m_paths({
+				folder + "/inactive",
+				folder + "/hovered",
+				folder + "/pressed"
+			})
 	{
-		m_body.setTexture(&Resources::get().textures.get(texture));
+		m_body.setTexture(&Resources::get().textures.get(m_paths[0]));
 	}
 
 	bool Widget::isHovered() {
@@ -13,11 +17,11 @@ namespace nt {
 		return m_body.getGlobalBounds().contains(mousePos);
 	}
 
-	bool Widget::isClicked() {
+	bool Widget::isPressed() {
 		return isHovered() && sf::Mouse::isButtonPressed(sf::Mouse::Left);
 	}
 
-	bool Widget::isPressed() {
+	bool Widget::isClicked() {
 		bool isClkedNow = sf::Mouse::isButtonPressed(sf::Mouse::Left);
 		bool Val;
 		Val = m_clickedLastFrame && !isClkedNow;
@@ -35,7 +39,7 @@ namespace nt {
 		else if (isClicked()) {
 			m_state = State::PRESSED;
 		}
-		m_body.setTextureRect(m_texCoords[(int)m_state]);
+		m_body.setTexture(&Resources::get().textures.get(m_textures[(int)m_state]));
 	}
 
 	void Widget::render() {
