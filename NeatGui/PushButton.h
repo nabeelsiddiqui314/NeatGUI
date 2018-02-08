@@ -9,6 +9,11 @@ namespace nt {
 		PushButton();
 		~PushButton();
 	public:
+		void update() {
+			if (isClicked(false)) {
+				std::cout << "click ";
+			}
+		}
 	private:
 	};
 }

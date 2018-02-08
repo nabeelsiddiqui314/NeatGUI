@@ -12,21 +12,25 @@ namespace nt {
 		m_body.setTexture(&Resources::get().textures.get(m_paths[0]));
 	}
 
-	bool Widget::isHovered() {
+	bool Widget::isHovered(bool inside) {
 		auto mousePos = (sf::Vector2f)sf::Mouse::getPosition(*window::get());
-		return m_body.getGlobalBounds().contains(mousePos);
+		bool Val = m_body.getGlobalBounds().contains(mousePos);
+		 if(inside) 
+			 return Val;
+		 else 
+			 return !Val;
 	}
 
-	bool Widget::isPressed() {
-		return isHovered() && sf::Mouse::isButtonPressed(sf::Mouse::Left);
+	bool Widget::isPressed(bool inside) {
+		return isHovered(inside) && sf::Mouse::isButtonPressed(sf::Mouse::Left);
 	}
 
-	bool Widget::isClicked() {
+	bool Widget::isClicked(bool inside) {
 		bool isClkedNow = sf::Mouse::isButtonPressed(sf::Mouse::Left);
 		bool Val;
 		Val = m_clickedLastFrame && !isClkedNow;
 		m_clickedLastFrame = isClkedNow;
-		return isHovered() && Val;
+		return isHovered(inside) && Val;
 	}
 
 	void Widget::update() {
@@ -39,7 +43,7 @@ namespace nt {
 		else if (isClicked()) {
 			m_state = State::PRESSED;
 		}
-		m_body.setTexture(&Resources::get().textures.get(m_textures[(int)m_state]));
+		m_body.setTexture(&Resources::get().textures.get(m_paths[(int)m_state]));
 	}
 
 	void Widget::render() {

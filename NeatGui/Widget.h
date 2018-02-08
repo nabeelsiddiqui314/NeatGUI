@@ -20,14 +20,15 @@ namespace nt {
 	public:
 		virtual void update();
 		virtual void render();
-		bool isHovered();
-		bool isPressed();
-		bool isClicked();
 		
-		void setSize(int x, int y);
-		void setPosition(int x, int y);
-		const sf::Vector2f& getSize() const;
-		const sf::Vector2f& getPosition() const;
+		virtual void setSize(int x, int y);
+		virtual void setPosition(int x, int y);
+		virtual const sf::Vector2f& getSize() const;
+		virtual const sf::Vector2f& getPosition() const;
+	protected:
+		bool isHovered(bool inside = true);
+		bool isPressed(bool inside = true);
+		bool isClicked(bool inside = true);
 	protected:
 		sf::RectangleShape m_body;
 	private:
