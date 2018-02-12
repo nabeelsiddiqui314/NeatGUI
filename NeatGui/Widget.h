@@ -35,5 +35,6 @@ namespace nt {
 		State m_state = State::INACTIVE;
 		std::array<std::string, 3> m_paths;
 		bool m_clickedLastFrame = false;
+		bool m_isClickedNow = false;
 	};
 }

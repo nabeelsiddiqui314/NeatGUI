@@ -26,10 +26,9 @@ namespace nt {
 	}
 
 	bool Widget::isClicked(bool inside) {
-		bool isClkedNow = sf::Mouse::isButtonPressed(sf::Mouse::Left);
+		m_isClickedNow = sf::Mouse::isButtonPressed(sf::Mouse::Left);
 		bool Val;
-		Val = m_clickedLastFrame && !isClkedNow;
-		m_clickedLastFrame = isClkedNow;
+		Val = m_clickedLastFrame && !m_isClickedNow;
 		return isHovered(inside) && Val;
 	}
 
@@ -44,6 +43,7 @@ namespace nt {
 			m_state = State::PRESSED;
 		}
 		m_body.setTexture(&Resources::get().textures.get(m_paths[(int)m_state]));
+		m_clickedLastFrame = m_isClickedNow;
 	}
 
 	void Widget::render() {
