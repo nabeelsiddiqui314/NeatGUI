@@ -48,5 +48,6 @@ namespace nt {
 		     m_isClickedNow = false,
 		     m_isDragEnabledX = false,
 			 m_isDragEnabledY = false;
+		sf::Vector2f m_offset;
 	};
 }

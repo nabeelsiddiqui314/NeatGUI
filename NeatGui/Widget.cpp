@@ -72,6 +72,19 @@ namespace nt {
 		m_body.setTexture(&Resources::get().textures.get(m_paths[(int)m_state]));
 
 		m_clickedLastFrame = m_isClickedNow;
+		if (m_isDragEnabledX || m_isDragEnabledY) {
+			auto mousePos = (sf::Vector2f)sf::Mouse::getPosition(*nt::window::get());
+			auto bodyPos = m_body.getPosition();
+			if (isJustClicked())
+				m_offset = { mousePos.x - bodyPos.x,
+						     mousePos.y - bodyPos.y };
+			if (m_state == State::PRESSED) {
+				if (m_isDragEnabledX)
+					m_body.setPosition(mousePos.x - m_offset.x, m_body.getPosition().y);
+				if (m_isDragEnabledY)
+					m_body.setPosition(m_body.getPosition().x, mousePos.y - m_offset.y);
+			}
+		}
 	}
 
 	void Widget::render() {
