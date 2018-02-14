@@ -12,37 +12,65 @@ namespace nt {
 		m_body.setTexture(&Resources::get().textures.get(m_paths[0]));
 	}
 
-	bool Widget::isHovered(bool inside) {
+	bool Widget::isHovered(const Bounds bounds) {
 		auto mousePos = (sf::Vector2f)sf::Mouse::getPosition(*window::get());
 		bool Val = m_body.getGlobalBounds().contains(mousePos);
-		 if(inside) 
-			 return Val;
-		 else 
-			 return !Val;
+		switch (bounds) {
+		case ANYWHERE:
+			return true;
+			break;
+		case IN:
+			return Val;
+			break;
+		case OUT:
+			return !Val;
+			break;
+		}
 	}
 
-	bool Widget::isPressed(bool inside) {
-		return isHovered(inside) && sf::Mouse::isButtonPressed(sf::Mouse::Left);
+	bool Widget::isPressed(const Bounds bounds) {
+		return isHovered(bounds) && sf::Mouse::isButtonPressed(sf::Mouse::Left);
 	}
 
-	bool Widget::isClicked(bool inside) {
+	bool Widget::isJustClicked(const Bounds bounds) {
+		m_isClickedNow = sf::Mouse::isButtonPressed(sf::Mouse::Left);
+		bool Val;
+		Val = !m_clickedLastFrame && m_isClickedNow;
+		return isHovered(bounds) && Val;
+	}
+
+	bool Widget::isReleaseClicked(const Bounds bounds) {
 		m_isClickedNow = sf::Mouse::isButtonPressed(sf::Mouse::Left);
 		bool Val;
 		Val = m_clickedLastFrame && !m_isClickedNow;
-		return isHovered(inside) && Val;
+		return isHovered(bounds) && Val;
+	}
+
+	void Widget::enableDragX(bool shdEnable) {
+		m_isDragEnabledX = shdEnable;
+	}
+
+	void Widget::enableDragY(bool shdEnable) {
+		m_isDragEnabledY = shdEnable;
+	}
+
+	void Widget::enableDrag(bool shdEnable) {
+		enableDragX(shdEnable);
+		enableDragY(shdEnable);
 	}
 
 	void Widget::update() {
-		if (!isHovered() && !isClicked()) {
+		if (!isHovered() && !isPressed()) {
 			m_state = State::INACTIVE;
 		}
-		else if (isHovered() && !isClicked()) {
+		else if (isHovered() && !isPressed()) {
 			m_state = State::HOVERED;
 		}
-		else if (isClicked()) {
+		else if (isPressed()) {
 			m_state = State::PRESSED;
 		}
 		m_body.setTexture(&Resources::get().textures.get(m_paths[(int)m_state]));
+
 		m_clickedLastFrame = m_isClickedNow;
 	}
 

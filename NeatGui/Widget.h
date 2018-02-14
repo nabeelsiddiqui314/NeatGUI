@@ -14,6 +14,12 @@ namespace nt {
 			HOVERED,
 			PRESSED
 		};
+	protected:
+		enum Bounds {
+			IN,
+			OUT,
+			ANYWHERE
+		};
 	public:
 		Widget(const std::string& folder);
 		virtual ~Widget();
@@ -26,15 +32,21 @@ namespace nt {
 		virtual const sf::Vector2f& getSize() const;
 		virtual const sf::Vector2f& getPosition() const;
 	protected:
-		bool isHovered(bool inside = true);
-		bool isPressed(bool inside = true);
-		bool isClicked(bool inside = true);
+		bool isHovered(const Bounds bounds = Bounds::IN);
+		bool isPressed(const Bounds bounds = Bounds::IN);
+		bool isJustClicked(const Bounds bounds = Bounds::IN);
+		bool isReleaseClicked(const Bounds bounds = Bounds::IN);
+		void enableDragX(bool shdEnable = true);
+		void enableDragY(bool shdEnable = true);
+		void enableDrag(bool shdEnable = true);
 	protected:
 		sf::RectangleShape m_body;
 	private:
 		State m_state = State::INACTIVE;
 		std::array<std::string, 3> m_paths;
-		bool m_clickedLastFrame = false;
-		bool m_isClickedNow = false;
+		bool m_clickedLastFrame = false,
+		     m_isClickedNow = false,
+		     m_isDragEnabledX = false,
+			 m_isDragEnabledY = false;
 	};
 }

@@ -10,11 +10,8 @@ namespace nt {
 		~PushButton();
 	public:
 		void update() {
-			if (isClicked()) {
-				std::cout << "click1 ";
-			}
-			if (isClicked()) {
-				std::cout << "click2 ";
+			if (isJustClicked(IN)) {
+				std::cout << "b";
 			}
 			Widget::update();
 		}
