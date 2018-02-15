@@ -9,10 +9,7 @@ namespace nt {
 		PushButton();
 		~PushButton();
 	public:
-		void update() {
-			Widget::update();
-			if (isJustClicked(IN));
-		}
 	private:
+		sf::Text m_label;
 	};
 }

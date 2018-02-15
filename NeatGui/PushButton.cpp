@@ -3,11 +3,10 @@
 
 namespace nt {
 	PushButton::PushButton()
-		: Widget("test")
+		: Widget("Push_Button")
 	{
 		setPosition(500, 500);
 		setSize(200, 150);
-		enableDrag();
 	}
 
 

@@ -43,7 +43,7 @@ namespace nt {
 		sf::RectangleShape m_body;
 	private:
 		State m_state = State::INACTIVE;
-		std::array<std::string, 3> m_paths;
+		std::array<std::string, 3> m_texNames;
 		bool m_clickedLastFrame = false,
 		     m_isClickedNow = false,
 		     m_isDragEnabledX = false,

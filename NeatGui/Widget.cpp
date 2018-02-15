@@ -3,13 +3,13 @@
 
 namespace nt {
 	Widget::Widget(const std::string& folder)
-		: m_paths({
+		: m_texNames({
 				folder + "/inactive",
 				folder + "/hovered",
 				folder + "/pressed"
 			})
 	{
-		m_body.setTexture(&Resources::get().textures.get(m_paths[0]));
+		m_body.setTexture(&Resources::get().textures.get(m_texNames[0]));
 	}
 
 	bool Widget::isHovered(const Bounds bounds) {
@@ -69,7 +69,7 @@ namespace nt {
 		else if (isPressed()) {
 			m_state = State::PRESSED;
 		}
-		m_body.setTexture(&Resources::get().textures.get(m_paths[(int)m_state]));
+		m_body.setTexture(&Resources::get().textures.get(m_texNames[(int)m_state]));
 
 		m_clickedLastFrame = m_isClickedNow;
 		if (m_isDragEnabledX || m_isDragEnabledY) {

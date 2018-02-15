@@ -12,7 +12,7 @@ namespace nt {
 		ResourceLoader(const std::string& folder, const std::string& extention)
 		: m_folder("./assets/" + folder + "/")
 		, m_extention("." + extention) {
-			
+			m_fail.loadFromFile(getFilename("/fail/FAIL"));
 		}
 		~ResourceLoader() {}
 	public:
@@ -28,9 +28,7 @@ namespace nt {
 
 		Resource& get(const std::string&  name) {
 			if (!exists(name)) {
-				Resource fail;
-				fail.loadFromFile(getFilename("/fail/FAIL"));
-				return fail;
+				return m_fail;
 			}
 			return m_resources.at(name);
 		}
@@ -44,6 +42,7 @@ namespace nt {
 		}
 	private:
 		std::unordered_map<std::string, Resource> m_resources;
+		Resource m_fail;
 
 		std::string m_folder;
 		std::string m_extention;
