@@ -3,7 +3,7 @@
 
 namespace nt {
 	PushButton::PushButton()
-		: Widget("Push_Button")
+		: Widget("button", {sf::IntRect(0, 0, 200, 150), sf::IntRect(50, 50, 200, 150), sf::IntRect(100, 100, 200, 150)})
 	{
 		setPosition(500, 500);
 		setSize(200, 150);

@@ -21,7 +21,7 @@ namespace nt {
 			ANYWHERE
 		};
 	public:
-		Widget(const std::string& folder);
+		Widget(const std::string& path, std::array<sf::IntRect, 3> texCoords);
 		virtual ~Widget();
 	public:
 		virtual void update();
@@ -43,11 +43,11 @@ namespace nt {
 		sf::RectangleShape m_body;
 	private:
 		State m_state = State::INACTIVE;
-		std::array<std::string, 3> m_texNames;
+		std::array<sf::IntRect, 3> m_texCoords;
 		bool m_clickedLastFrame = false,
 		     m_isClickedNow = false,
 		     m_isDragEnabledX = false,
 			 m_isDragEnabledY = false;
-		sf::Vector2f m_offset;
+		sf::Vector2f m_dragMouseOffset;
 	};
 }

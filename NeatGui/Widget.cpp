@@ -2,14 +2,11 @@
 #include "Widget.h"
 
 namespace nt {
-	Widget::Widget(const std::string& folder)
-		: m_texNames({
-				folder + "/inactive",
-				folder + "/hovered",
-				folder + "/pressed"
-			})
+	Widget::Widget(const std::string& path, std::array<sf::IntRect, 3> texCoords)
+		: m_texCoords(texCoords)
 	{
-		m_body.setTexture(&Resources::get().textures.get(m_texNames[0]));
+		m_body.setTexture(&Resources::get().textures.get(path));
+		m_body.setTextureRect(m_texCoords[0]);
 	}
 
 	bool Widget::isHovered(const Bounds bounds) {
@@ -69,20 +66,20 @@ namespace nt {
 		else if (isPressed()) {
 			m_state = State::PRESSED;
 		}
-		m_body.setTexture(&Resources::get().textures.get(m_texNames[(int)m_state]));
+		m_body.setTextureRect(m_texCoords[(int)m_state]);
 
 		m_clickedLastFrame = m_isClickedNow;
 		if (m_isDragEnabledX || m_isDragEnabledY) {
 			auto mousePos = (sf::Vector2f)sf::Mouse::getPosition(*nt::window::get());
 			auto bodyPos = m_body.getPosition();
 			if (isJustClicked())
-				m_offset = { mousePos.x - bodyPos.x,
+				m_dragMouseOffset = { mousePos.x - bodyPos.x,
 						     mousePos.y - bodyPos.y };
 			if (m_state == State::PRESSED) {
 				if (m_isDragEnabledX)
-					m_body.setPosition(mousePos.x - m_offset.x, m_body.getPosition().y);
+					m_body.setPosition(mousePos.x - m_dragMouseOffset.x, m_body.getPosition().y);
 				if (m_isDragEnabledY)
-					m_body.setPosition(m_body.getPosition().x, mousePos.y - m_offset.y);
+					m_body.setPosition(m_body.getPosition().x, mousePos.y - m_dragMouseOffset.y);
 			}
 		}
 	}
