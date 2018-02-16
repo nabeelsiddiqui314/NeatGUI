@@ -23,6 +23,13 @@ namespace nt {
 			}
 		}
 
+		void add(const std::string& name) {
+			Resource r;
+			if (r.loadFromFile(getFilename(name))) {
+				m_resources.insert(std::make_pair(name, r));
+			}
+		}
+
 		Resource& get(const std::string&  name) {
 			if (!exists(name)) {
 				return m_fail;
