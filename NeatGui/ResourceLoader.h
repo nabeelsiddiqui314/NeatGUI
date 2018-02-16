@@ -18,12 +18,9 @@ namespace nt {
 	public:
 		void add(const std::string& filepath, const std::string& name) {
 			Resource r;
-			if (!r.loadFromFile(getFilename(filepath)) || exists(name)) {
-				Resource fail;
-				fail.loadFromFile(getFilename("/fail/FAIL"));
-				m_resources.insert(std::make_pair(name, fail));
+			if (r.loadFromFile(getFilename(filepath))) {
+				m_resources.insert(std::make_pair(name, r));
 			}
-			else m_resources.insert(std::make_pair(name, r));
 		}
 
 		Resource& get(const std::string&  name) {
