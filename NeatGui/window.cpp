@@ -8,7 +8,7 @@ namespace nt {
 		m_window->create(sf::VideoMode(width, height), title, sf::Style::Close);
 	}
 
-	std::shared_ptr<sf::RenderWindow> window::get() {
+	const std::shared_ptr<sf::RenderWindow> window::get() {
 		return m_window;
 	}
 }

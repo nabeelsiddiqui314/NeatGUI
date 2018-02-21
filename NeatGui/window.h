@@ -10,7 +10,7 @@ namespace nt {
 		~window() {}
 	public:
 		static void create(const unsigned int width, const unsigned int height, const std::string& title);
-		static std::shared_ptr<sf::RenderWindow> get();
+		static const std::shared_ptr<sf::RenderWindow> get();
 	private:
 		static std::shared_ptr<sf::RenderWindow> m_window;
 	};

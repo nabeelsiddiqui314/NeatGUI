@@ -39,9 +39,8 @@ namespace nt {
 		void enableDragX(bool shdEnable = true);
 		void enableDragY(bool shdEnable = true);
 		void enableDrag(bool shdEnable = true);
-	protected:
-		sf::RectangleShape m_body;
 	private:
+		sf::RectangleShape m_body;
 		State m_state = State::INACTIVE;
 		std::array<sf::IntRect, 3> m_texCoords;
 		bool m_clickedLastFrame = false,
