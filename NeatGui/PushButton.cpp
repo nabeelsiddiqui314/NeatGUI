@@ -8,7 +8,7 @@ namespace nt {
 		setPosition(0, 0);
 		setSize(305, 300);
 		m_label.setCharacterSize(15u);
-		m_label.setString("push to quit");
+		m_label.setString("Text");
 		m_label.setFillColor(sf::Color::Black);
 		m_label.setFont(Resources::get().fonts.get("setMe"));
 		repositionText();
