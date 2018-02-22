@@ -19,7 +19,7 @@ namespace nt {
 		m_body.setOutlineColor(m_colors[0].border);
 	}
 
-	bool Widget::isHovered(const Bounds bounds) {
+	bool Widget::isHovered(const Bounds& bounds) {
 		auto mousePos = (sf::Vector2f)sf::Mouse::getPosition(*window::get());
 		bool Val = m_body.getGlobalBounds().contains(mousePos);
 		switch (bounds) {
@@ -35,18 +35,18 @@ namespace nt {
 		}
 	}
 
-	bool Widget::isPressed(const Bounds bounds) {
+	bool Widget::isPressed(const Bounds& bounds) {
 		return isHovered(bounds) && sf::Mouse::isButtonPressed(sf::Mouse::Left);
 	}
 
-	bool Widget::isJustClicked(const Bounds bounds) {
+	bool Widget::isJustClicked(const Bounds& bounds) {
 		m_isClickedNow = sf::Mouse::isButtonPressed(sf::Mouse::Left);
 		bool Val;
 		Val = !m_clickedLastFrame && m_isClickedNow;
 		return isHovered(bounds) && Val;
 	}
 
-	bool Widget::isReleaseClicked(const Bounds bounds) {
+	bool Widget::isReleaseClicked(const Bounds& bounds) {
 		m_isClickedNow = sf::Mouse::isButtonPressed(sf::Mouse::Left);
 		bool Val;
 		Val = m_clickedLastFrame && !m_isClickedNow;

@@ -46,10 +46,10 @@ namespace nt {
 		virtual const sf::Vector2f& getSize() const;
 		virtual const sf::Vector2f& getPosition() const;
 	protected:
-		bool isHovered(const Bounds bounds = Bounds::IN);
-		bool isPressed(const Bounds bounds = Bounds::IN);
-		bool isJustClicked(const Bounds bounds = Bounds::IN);
-		bool isReleaseClicked(const Bounds bounds = Bounds::IN);
+		bool isHovered(const Bounds& bounds = Bounds::IN);
+		bool isPressed(const Bounds &bounds = Bounds::IN);
+		bool isJustClicked(const Bounds& bounds = Bounds::IN);
+		bool isReleaseClicked(const Bounds& bounds = Bounds::IN);
 		void enableDragX(bool shdEnable = true);
 		void enableDragY(bool shdEnable = true);
 		void enableDrag(bool shdEnable = true);
