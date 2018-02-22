@@ -2,11 +2,21 @@
 #include "Widget.h"
 
 namespace nt {
-	Widget::Widget(const std::string& path, std::array<sf::IntRect, 3> texCoords)
-		: m_texCoords(texCoords)
+	Widget::Widget(const std::string& path, const std::array<sf::IntRect, 3>& texCoords)
+		: m_type(TEXTURED)
+		, m_texCoords(texCoords)
 	{
 		m_body.setTexture(&Resources::get().textures.get(path));
 		m_body.setTextureRect(m_texCoords[0]);
+	}
+
+	Widget::Widget(const std::array<Colors, 3>& colors, int borderThickness)
+		: m_type(COLORED)
+		, m_colors(colors)
+	{
+		m_body.setOutlineThickness(borderThickness);
+		m_body.setFillColor(m_colors[0].body);
+		m_body.setOutlineColor(m_colors[0].border);
 	}
 
 	bool Widget::isHovered(const Bounds bounds) {
@@ -66,7 +76,17 @@ namespace nt {
 		else if (isPressed()) {
 			m_state = State::PRESSED;
 		}
-		m_body.setTextureRect(m_texCoords[(int)m_state]);
+
+		switch (m_type)
+		{
+		case COLORED:
+			m_body.setFillColor(m_colors[(int)m_state].body);
+			m_body.setOutlineColor(m_colors[(int)m_state].border);
+			break;
+		case TEXTURED:
+			m_body.setTextureRect(m_texCoords[(int)m_state]);
+			break;
+		}
 
 		m_clickedLastFrame = m_isClickedNow;
 		if (m_isDragEnabledX || m_isDragEnabledY) {

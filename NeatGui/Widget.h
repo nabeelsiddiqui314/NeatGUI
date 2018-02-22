@@ -9,10 +9,14 @@ namespace nt {
 	class Widget
 	{
 	private:
-		enum class State {
+		enum State {
 			INACTIVE,
 			HOVERED,
 			PRESSED
+		};
+		enum Type {
+			COLORED,
+			TEXTURED
 		};
 	protected:
 		enum Bounds {
@@ -20,8 +24,18 @@ namespace nt {
 			OUT,
 			ANYWHERE
 		};
+		struct Colors {
+			Colors() = default;
+			Colors(const sf::Color& body, const sf::Color& border) 
+				: body(body)
+				, border(border)
+			{}
+			sf::Color body;
+			sf::Color border;
+		};
 	public:
-		Widget(const std::string& path, std::array<sf::IntRect, 3> texCoords);
+		Widget(const std::string& path, const std::array<sf::IntRect, 3>& texCoords);
+		Widget(const std::array<Colors, 3>& colors, int borderThickness = 1);
 		virtual ~Widget();
 	public:
 		virtual void update();
@@ -40,9 +54,12 @@ namespace nt {
 		void enableDragY(bool shdEnable = true);
 		void enableDrag(bool shdEnable = true);
 	private:
-		sf::RectangleShape m_body;
-		State m_state = State::INACTIVE;
+		sf::RectangleShape         m_body;
+		State                      m_state = INACTIVE;
+		Type                       m_type;
 		std::array<sf::IntRect, 3> m_texCoords;
+		std::array<Colors, 3>      m_colors;
+
 		bool m_clickedLastFrame = false,
 		     m_isClickedNow = false,
 		     m_isDragEnabledX = false,
