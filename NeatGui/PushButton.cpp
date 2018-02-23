@@ -3,10 +3,7 @@
 
 namespace nt {
 	PushButton::PushButton()
-		//: Widget("button", { sf::IntRect(0, 0, 100, 100), sf::IntRect(0, 100, 100, 100), sf::IntRect(0, 200, 100, 100) })
-		: Widget({ Colors(sf::Color(189, 189, 189), sf::Color(200, 200, 200)), 
-			Colors(sf::Color(189, 213, 225), sf::Color(150, 200, 200)), 
-			Colors(sf::Color(0, 210, 210), sf::Color(200, 200, 150)) })
+		: Widget({ "ey" })
 	{
 		setPosition(0, 0);
 		setSize(305, 300);

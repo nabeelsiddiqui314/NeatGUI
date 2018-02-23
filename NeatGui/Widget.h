@@ -4,6 +4,7 @@
 #include <array>
 #include "window.h"
 #include "Resources.h"
+#include "InfoFile.h"
 
 namespace nt {
 	class Widget
@@ -14,28 +15,14 @@ namespace nt {
 			HOVERED,
 			PRESSED
 		};
-		enum Type {
-			COLORED,
-			TEXTURED
-		};
 	protected:
 		enum Bounds {
 			IN,
 			OUT,
 			ANYWHERE
 		};
-		struct Colors {
-			Colors() = default;
-			Colors(const sf::Color& body, const sf::Color& border) 
-				: body(body)
-				, border(border)
-			{}
-			sf::Color body;
-			sf::Color border;
-		};
 	public:
-		Widget(const std::string& path, const std::array<sf::IntRect, 3>& texCoords);
-		Widget(const std::array<Colors, 3>& colors, int borderThickness = 1);
+		Widget(const hiddenNT::InfoFile& infoFile);
 		virtual ~Widget();
 	public:
 		virtual void update();
@@ -56,9 +43,9 @@ namespace nt {
 	private:
 		sf::RectangleShape         m_body;
 		State                      m_state = INACTIVE;
-		Type                       m_type;
+		hiddenNT::Type                       m_type;
 		std::array<sf::IntRect, 3> m_texCoords;
-		std::array<Colors, 3>      m_colors;
+		std::array<hiddenNT::Colors, 3>      m_colors;
 
 		bool m_clickedLastFrame = false,
 		     m_isClickedNow = false,

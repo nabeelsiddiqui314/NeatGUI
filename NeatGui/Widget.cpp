@@ -2,21 +2,23 @@
 #include "Widget.h"
 
 namespace nt {
-	Widget::Widget(const std::string& path, const std::array<sf::IntRect, 3>& texCoords)
-		: m_type(TEXTURED)
-		, m_texCoords(texCoords)
+	Widget::Widget(const hiddenNT::InfoFile& infoFile)
 	{
-		m_body.setTexture(&Resources::get().textures.get(path));
-		m_body.setTextureRect(m_texCoords[0]);
-	}
-
-	Widget::Widget(const std::array<Colors, 3>& colors, int borderThickness)
-		: m_type(COLORED)
-		, m_colors(colors)
-	{
-		m_body.setOutlineThickness(borderThickness);
-		m_body.setFillColor(m_colors[0].body);
-		m_body.setOutlineColor(m_colors[0].border);
+		switch (infoFile.getType()) {
+		case hiddenNT::COLORED:
+			m_type = hiddenNT::COLORED;
+			m_colors = infoFile.getColors();
+			m_body.setFillColor(m_colors[0].body);
+			m_body.setOutlineThickness(1);
+			m_body.setOutlineColor(m_colors[0].border);
+			break;
+		case hiddenNT::TEXTURED:
+			m_type = hiddenNT::TEXTURED;
+			m_texCoords = infoFile.getTexCoords();
+			m_body.setTexture(&Resources::get().textures.get(infoFile.getFilepath()));
+			m_body.setTextureRect(m_texCoords[0]);
+			break;
+		}
 	}
 
 	bool Widget::isHovered(const Bounds& bounds) {
@@ -79,11 +81,11 @@ namespace nt {
 
 		switch (m_type)
 		{
-		case COLORED:
+		case hiddenNT::COLORED:
 			m_body.setFillColor(m_colors[(int)m_state].body);
 			m_body.setOutlineColor(m_colors[(int)m_state].border);
 			break;
-		case TEXTURED:
+		case hiddenNT::TEXTURED:
 			m_body.setTextureRect(m_texCoords[(int)m_state]);
 			break;
 		}
