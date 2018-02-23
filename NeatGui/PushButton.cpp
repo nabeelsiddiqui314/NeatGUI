@@ -3,7 +3,7 @@
 
 namespace nt {
 	PushButton::PushButton()
-		: Widget({ "ey" })
+		: Widget({ "test" })
 	{
 		setPosition(0, 0);
 		setSize(305, 300);

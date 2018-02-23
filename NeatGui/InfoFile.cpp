@@ -3,11 +3,12 @@
 
 namespace hiddenNT {
 	InfoFile::InfoFile(const std::string& filepath) {
-		m_file.open("./Info/" + filepath);
+		m_file.open("./Info/" + filepath + ".txt");
 
 		std::string temp;
 		while (std::getline(m_file, temp)) {
 			if (temp == "COLORED") {
+				m_type = COLORED;
 				for (unsigned short int i = 0; i < 3; i++) {
 					m_file >> temp;
 					int bodyR = std::stoi(temp);
@@ -28,6 +29,9 @@ namespace hiddenNT {
 				}
 			}
 			else if (temp == "TEXTURED") {
+				m_type = TEXTURED;
+				m_file >> temp;
+				m_filepath = temp;
 				for (unsigned short int i = 0; i < 3; i++) {
 					m_file >> temp;
 					int startX = std::stoi(temp);
