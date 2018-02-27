@@ -55,15 +55,17 @@ namespace nt {
 		return isHovered(bounds) && Val;
 	}
 
-	void Widget::enableDragX(bool shdEnable) {
+	void Widget::enableDragX(bool shdEnable, bool callOverride) {
 		m_isDragEnabledX = shdEnable;
+		m_callOverrideForDrag = callOverride;
 	}
 
-	void Widget::enableDragY(bool shdEnable) {
+	void Widget::enableDragY(bool shdEnable, bool callOverride) {
 		m_isDragEnabledY = shdEnable;
+		m_callOverrideForDrag = callOverride;
 	}
 
-	void Widget::enableDrag(bool shdEnable) {
+	void Widget::enableDrag(bool shdEnable, bool callOverride) {
 		enableDragX(shdEnable);
 		enableDragY(shdEnable);
 	}
@@ -98,10 +100,18 @@ namespace nt {
 				m_dragMouseOffset = { mousePos.x - bodyPos.x,
 						     mousePos.y - bodyPos.y };
 			if (m_state == State::PRESSED) {
-				if (m_isDragEnabledX)
-					setPosition(mousePos.x - m_dragMouseOffset.x, m_body.getPosition().y);
-				if (m_isDragEnabledY)
-					setPosition(m_body.getPosition().x, mousePos.y - m_dragMouseOffset.y);
+				if (m_isDragEnabledX) {
+					if (m_callOverrideForDrag) 
+						setPosition(mousePos.x - m_dragMouseOffset.x, m_body.getPosition().y);
+					else 
+						m_body.setPosition(mousePos.x - m_dragMouseOffset.x, m_body.getPosition().y);
+				}
+				if (m_isDragEnabledY) {
+					if (m_callOverrideForDrag) 
+						setPosition(m_body.getPosition().x, mousePos.y - m_dragMouseOffset.y);
+					else
+						m_body.setPosition(m_body.getPosition().x, mousePos.y - m_dragMouseOffset.y);
+				}
 			}
 		}
 	}

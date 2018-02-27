@@ -37,9 +37,9 @@ namespace nt {
 		bool isPressed(const Bounds &bounds = Bounds::IN);
 		bool isJustClicked(const Bounds& bounds = Bounds::IN);
 		bool isReleaseClicked(const Bounds& bounds = Bounds::IN);
-		void enableDragX(bool shdEnable = true);
-		void enableDragY(bool shdEnable = true);
-		void enableDrag(bool shdEnable = true);
+		void enableDragX(bool shdEnable = true, bool callOverride = true);
+		void enableDragY(bool shdEnable = true, bool callOverride = true);
+		void enableDrag(bool shdEnable = true, bool callOverride = true);
 	private:
 		sf::RectangleShape         m_body;
 		State                      m_state = INACTIVE;
@@ -50,7 +50,8 @@ namespace nt {
 		bool m_clickedLastFrame = false,
 		     m_isClickedNow = false,
 		     m_isDragEnabledX = false,
-			 m_isDragEnabledY = false;
+			 m_isDragEnabledY = false,
+		     m_callOverrideForDrag = true;
 		sf::Vector2f m_dragMouseOffset;
 	};
 }
