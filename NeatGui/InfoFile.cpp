@@ -65,5 +65,6 @@ namespace hiddenNT {
 
 	InfoFile::~InfoFile()
 	{
+		m_file.clear();
 	}
 }

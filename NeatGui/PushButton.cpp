@@ -3,14 +3,14 @@
 
 namespace nt {
 	PushButton::PushButton()
-		: Widget({ "test" })
+		: Widget({ "Push_Button" })
 	{
 		setPosition(0, 0);
-		setSize(305, 300);
-		m_label.setCharacterSize(15u);
+		setSize(100, 100);
+		m_label.setCharacterSize(14u);
 		m_label.setString("Text");
 		m_label.setFillColor(sf::Color::Black);
-		m_label.setFont(Resources::get().fonts.get("setMe"));
+		m_label.setFont(Resources::get().fonts.get("setME"));
 		repositionText();
 	}
 
@@ -30,7 +30,7 @@ namespace nt {
 
 	void PushButton::repositionText() {
 		m_label.setPosition(getPosition().x + (getSize().x / 2) - (m_label.getGlobalBounds().width / 2),
-			getPosition().y + (getSize().y / 2) - (m_label.getGlobalBounds().height / 2));
+			getPosition().y + (getSize().y / 2) - (m_label.getGlobalBounds().height / 2) - 2);
 	}
 
 	void PushButton::setPosition(int x, int y) {

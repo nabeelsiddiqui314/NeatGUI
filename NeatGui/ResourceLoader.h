@@ -21,6 +21,8 @@ namespace nt {
 			if (r.loadFromFile(getFilename(filepath))) {
 				m_resources.insert(std::make_pair(name, r));
 			}
+			else
+				m_resources.insert(std::make_pair(name, m_fail));
 		}
 
 		void add(const std::string& name) {
@@ -28,11 +30,13 @@ namespace nt {
 			if (r.loadFromFile(getFilename(name))) {
 				m_resources.insert(std::make_pair(name, r));
 			}
+			else
+				m_resources.insert(std::make_pair(name, m_fail));
 		}
 
-		Resource& get(const std::string&  name) {
+		Resource& get(const std::string& name) {
 			if (!exists(name)) {
-				return m_fail;
+				add(name);
 			}
 			return m_resources.at(name);
 		}

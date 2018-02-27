@@ -7,7 +7,7 @@ namespace nt {
 	, fonts("fonts", "ttf")
 	, soundBuffers("sounds", "wav") 
 	{
-		textures.add("button");
+		
 	}
 
 	Resources& Resources::get() {
