@@ -99,9 +99,9 @@ namespace nt {
 						     mousePos.y - bodyPos.y };
 			if (m_state == State::PRESSED) {
 				if (m_isDragEnabledX)
-					m_body.setPosition(mousePos.x - m_dragMouseOffset.x, m_body.getPosition().y);
+					setPosition(mousePos.x - m_dragMouseOffset.x, m_body.getPosition().y);
 				if (m_isDragEnabledY)
-					m_body.setPosition(m_body.getPosition().x, mousePos.y - m_dragMouseOffset.y);
+					setPosition(m_body.getPosition().x, mousePos.y - m_dragMouseOffset.y);
 			}
 		}
 	}
