@@ -7,6 +7,7 @@ namespace nt {
 	{
 	public:
 		Slider();
+		Slider(const sf::Vector2i& pos, const sf::Vector2i& size, const int sliderWidth, const int startVal, const int max);
 		~Slider();
 	public:
 		void setPosition(int x, int y) override;
@@ -15,7 +16,9 @@ namespace nt {
 		const sf::Vector2f& getSize() const override;
 		void update() override;
 		void render() override;
+		const int getValue() const;
 	private:
 		sf::RectangleShape m_bar;
+		int m_max;
 	};
 }

@@ -6,12 +6,26 @@ namespace nt {
 		: Widget({ "Slider" }) 
 	{
 		enableDragX(true, false);
-		m_bar.setSize({400.0f, 20.0f});
+		m_bar.setSize({400.0f, 5.0f});
 		setSize(400, 40);
 		setPosition(50, 50);
 		m_bar.setFillColor(sf::Color(189, 189, 189));
 		m_bar.setOutlineThickness(1);
 		m_bar.setOutlineColor(sf::Color::Black);
+	}
+
+	Slider::Slider(const sf::Vector2i& pos, const sf::Vector2i& size, const int sliderWidth, const int startVal, const int max)
+		: Widget({ "Slider" })
+		, m_max(max)
+	{
+		enableDragX(true, false);
+		m_bar.setSize({(float)size.x, 5.0f});
+		setSize(size.x, size.y);
+		setPosition(pos.x, pos.y);
+		m_bar.setFillColor(sf::Color(189, 189, 189));
+		m_bar.setOutlineThickness(1);
+		m_bar.setOutlineColor(sf::Color::Black);
+		Widget::setSize(sliderWidth, Widget::getSize().y);
 	}
 
 	void Slider::setPosition(int x, int y) {
@@ -45,6 +59,13 @@ namespace nt {
 	void Slider::render() {
 		window::get()->draw(m_bar);
 		Widget::render();
+	}
+
+	const int Slider::getValue() const {
+		float pos = Widget::getSize().x / 2 + Widget::getPosition().x - m_bar.getPosition().x;
+		float maxLength = m_bar.getSize().x;
+		float Val = (pos / maxLength) * m_max;
+		return Val;
 	}
 
 	Slider::~Slider()
