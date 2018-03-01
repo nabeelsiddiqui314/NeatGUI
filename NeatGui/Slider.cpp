@@ -6,7 +6,7 @@ namespace nt {
 		: Widget({ "Slider" }) 
 	{
 		enableDragX(true, false);
-		m_bar.setSize({400.0f, 5.0f});
+		m_bar.setSize({ 400.0f, 5.0f });
 		setSize(400, 40);
 		setPosition(50, 50);
 		m_bar.setFillColor(sf::Color(189, 189, 189));
@@ -19,8 +19,8 @@ namespace nt {
 		, m_max(max)
 	{
 		enableDragX(true, false);
-		m_bar.setSize({(float)size.x, 5.0f});
-		setSize(size.x, size.y);
+		m_bar.setSize({ (float)size.x, 5.0f });
+		setSize(size.x, std::max(size.y, 5));
 		setPosition(pos.x, pos.y);
 		m_bar.setFillColor(sf::Color(189, 189, 189));
 		m_bar.setOutlineThickness(1);
@@ -29,7 +29,7 @@ namespace nt {
 	}
 
 	void Slider::setPosition(int x, int y) {
-		Widget::setPosition(x, y);
+		Widget::setPosition(x + Widget::getPosition().x  - m_bar.getPosition().x , y);
 		m_bar.setPosition(x, y + Widget::getSize().y / 2 - m_bar.getSize().y / 2);
 	}
 
@@ -66,6 +66,12 @@ namespace nt {
 		float maxLength = m_bar.getSize().x;
 		float Val = (pos / maxLength) * m_max;
 		return Val;
+	}
+
+	void Slider::setValue(const int value) {
+		float offset = m_bar.getPosition().x - Widget::getSize().x / 2;
+		float pos = (value * m_bar.getSize().x) / m_max;
+		Widget::setPosition(offset + pos, Widget::getPosition().y);
 	}
 
 	Slider::~Slider()
