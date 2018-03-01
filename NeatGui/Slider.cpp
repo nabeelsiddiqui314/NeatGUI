@@ -26,6 +26,7 @@ namespace nt {
 		m_bar.setOutlineThickness(1);
 		m_bar.setOutlineColor(sf::Color::Black);
 		Widget::setSize(sliderWidth, Widget::getSize().y);
+		setValue(startVal);
 	}
 
 	void Slider::setPosition(int x, int y) {
@@ -49,11 +50,17 @@ namespace nt {
 	void Slider::update() {
 		Widget::update();
 
-		if (Widget::getPosition().x + Widget::getSize().x / 2 > m_bar.getPosition().x + m_bar.getSize().x)
-			Widget::setPosition(m_bar.getPosition().x + m_bar.getSize().x - Widget::getSize().x / 2, Widget::getPosition().y);
+		const float sliderPosX = Widget::getPosition().x + Widget::getSize().x / 2;
+		const float sliderPosY = Widget::getPosition().y;
+		const float sliderCenter = Widget::getSize().x / 2;
+		const float barPos = m_bar.getPosition().x;
+		const float barWidth = m_bar.getSize().x;
 
-		if (Widget::getPosition().x + Widget::getSize().x / 2 < m_bar.getPosition().x)
-			Widget::setPosition(m_bar.getPosition().x - Widget::getSize().x / 2, Widget::getPosition().y);
+		if (sliderPosX > barPos + barWidth)
+			Widget::setPosition(barPos + barWidth - sliderCenter, sliderPosY);
+
+		if (sliderPosX < barPos)
+			Widget::setPosition(barPos - sliderCenter, sliderPosY);
 	}
 
 	void Slider::render() {
