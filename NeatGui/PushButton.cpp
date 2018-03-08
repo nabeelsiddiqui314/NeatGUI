@@ -14,13 +14,47 @@ namespace nt {
 		repositionText();
 	}
 
-	bool PushButton::isClicked() {
-		return isReleaseClicked(IN);
+	PushButton::PushButton(const std::string& label)
+		: Widget({ "Push_Button" })
+	{
+		setPosition(0, 0);
+		setSize(100, 100);
+		m_label.setCharacterSize(14u);
+		m_label.setString("Text");
+		m_label.setFillColor(sf::Color::Black);
+		m_label.setFont(Resources::get().fonts.get("setME"));
+		repositionText();
+		setLabel(label);
+	}
+
+	PushButton::PushButton(const std::string& label, const std::function<void()>& slot)
+		: Widget({ "Push_Button" })
+	{
+		setPosition(0, 0);
+		setSize(100, 100);
+		m_label.setCharacterSize(14u);
+		m_label.setString("Text");
+		m_label.setFillColor(sf::Color::Black);
+		m_label.setFont(Resources::get().fonts.get("setME"));
+		repositionText();
+		setLabel(label);
+		setSlot(slot);
 	}
 
 	void PushButton::setLabel(const std::string& label) {
 		m_label.setString(label);
 		repositionText();
+	}
+
+	const std::string& PushButton::getLabel() const {
+		return m_label.getString();
+	}
+
+	void PushButton::update() {
+		Widget::update();
+		if (isReleaseClicked()) {
+			callSlot();
+		}
 	}
 
 	void PushButton::render() {

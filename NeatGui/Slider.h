@@ -1,13 +1,14 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "Widget.h"
+#include "Slot.h"
 
 namespace nt {
-	class Slider : public Widget
+	class Slider : public Widget, public Slot
 	{
 	public:
-		Slider();
-		Slider(const sf::Vector2i& pos, const sf::Vector2i& size, const int sliderWidth, const int startVal, const int max);
+		Slider(const int max, const int startVal = 0);
+		Slider(const int max, const std::function<void()>& slot, const int startVal = 0);
 		~Slider();
 	public:
 		void setPosition(int x, int y) override;
@@ -20,6 +21,7 @@ namespace nt {
 		void setValue(const int value);
 	private:
 		sf::RectangleShape m_bar;
+		int m_prevPos;
 		int m_max;
 	};
 }

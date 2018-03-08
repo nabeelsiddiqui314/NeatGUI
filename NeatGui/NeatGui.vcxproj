@@ -158,6 +158,7 @@
     <ClInclude Include="ResourceLoader.h" />
     <ClInclude Include="Resources.h" />
     <ClInclude Include="Slider.h" />
+    <ClInclude Include="Slot.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Widget.h" />
@@ -169,6 +170,7 @@
     <ClCompile Include="PushButton.cpp" />
     <ClCompile Include="Resources.cpp" />
     <ClCompile Include="Slider.cpp" />
+    <ClCompile Include="Slot.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

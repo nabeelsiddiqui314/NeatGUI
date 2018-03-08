@@ -1,6 +1,5 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include <iostream>
 #include <array>
 #include "window.h"
 #include "Resources.h"
@@ -41,10 +40,10 @@ namespace nt {
 		void enableDragY(bool shdEnable = true, bool callOverride = true);
 		void enableDrag(bool shdEnable = true, bool callOverride = true);
 	private:
-		sf::RectangleShape         m_body;
-		State                      m_state = INACTIVE;
+		sf::RectangleShape                   m_body;
+		State                                m_state = INACTIVE;
 		hiddenNT::Type                       m_type;
-		std::array<sf::IntRect, 3> m_texCoords;
+		std::array<sf::IntRect, 3>           m_texCoords;
 		std::array<hiddenNT::Colors, 3>      m_colors;
 
 		bool m_clickedLastFrame = false,
@@ -52,6 +51,7 @@ namespace nt {
 		     m_isDragEnabledX = false,
 			 m_isDragEnabledY = false,
 		     m_callOverrideForDrag = true;
+
 		sf::Vector2f m_dragMouseOffset;
 	};
 }
