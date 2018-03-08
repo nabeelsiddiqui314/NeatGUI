@@ -2,20 +2,23 @@
 #include "Widget.h"
 
 namespace nt {
-	Widget::Widget(const hiddenNT::ThemeParser& infoFile)
+	Widget::Widget(const std::string& themeFilePath)
 	{
-		switch (infoFile.getType()) {
-		case hiddenNT::COLORED:
-			m_type = hiddenNT::COLORED;
-			m_colors = infoFile.getColors();
+		ThemeParser themeFile(themeFilePath, 3);
+		switch (themeFile.getType()) {
+		case COLORED:
+			m_type = COLORED;
+			for(std::size_t i = 0; i < 3; i++)
+				m_colors[i] = themeFile.getColors()[i];
 			m_body.setFillColor(m_colors[0].body);
 			m_body.setOutlineThickness(1);
 			m_body.setOutlineColor(m_colors[0].border);
 			break;
-		case hiddenNT::TEXTURED:
-			m_type = hiddenNT::TEXTURED;
-			m_texCoords = infoFile.getTexCoords();
-			m_body.setTexture(&Resources::get().textures.get(infoFile.getFilepath()));
+		case TEXTURED:
+			m_type = TEXTURED;
+			for (std::size_t i = 0; i < 3; i++)
+				m_texCoords[i] = themeFile.getTexCoords()[i];
+			m_body.setTexture(&Resources::get().textures.get(themeFile.getFilepath()));
 			m_body.setTextureRect(m_texCoords[0]);
 			break;
 		}
@@ -83,11 +86,11 @@ namespace nt {
 
 		switch (m_type)
 		{
-		case hiddenNT::COLORED:
+		case COLORED:
 			m_body.setFillColor(m_colors[(int)m_state].body);
 			m_body.setOutlineColor(m_colors[(int)m_state].border);
 			break;
-		case hiddenNT::TEXTURED:
+		case TEXTURED:
 			m_body.setTextureRect(m_texCoords[(int)m_state]);
 			break;
 		}

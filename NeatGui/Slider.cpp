@@ -3,7 +3,7 @@
 
 namespace nt {
 	Slider::Slider(const int max, const int startVal)
-		: Widget({ "Slider" }) 
+		: Widget("Slider") 
 		, m_max(max)
 	{
 		enableDragX(true, false);
@@ -18,7 +18,7 @@ namespace nt {
 	}
 
 	Slider::Slider(const int max, const std::function<void()>& slot, const int startVal)
-		: Widget({ "Slider" })
+		: Widget("Slider")
 		, m_max(max)
 	{
 		enableDragX(true, false);

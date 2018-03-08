@@ -21,7 +21,7 @@ namespace nt {
 			ANYWHERE
 		};
 	public:
-		Widget(const hiddenNT::ThemeParser& infoFile);
+		Widget(const std::string& themeFilePath);
 		virtual ~Widget();
 	public:
 		virtual void update();
@@ -42,9 +42,9 @@ namespace nt {
 	private:
 		sf::RectangleShape                   m_body;
 		State                                m_state = INACTIVE;
-		hiddenNT::Type                       m_type;
+		Type                       m_type;
 		std::array<sf::IntRect, 3>           m_texCoords;
-		std::array<hiddenNT::Colors, 3>      m_colors;
+		std::array<Colors, 3>      m_colors;
 
 		bool m_clickedLastFrame = false,
 		     m_isClickedNow = false,

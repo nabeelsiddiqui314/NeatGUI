@@ -3,7 +3,7 @@
 #include <array>
 #include <fstream>
 
-namespace hiddenNT {
+namespace nt {
 	enum Type {
 		COLORED,
 		TEXTURED
@@ -22,18 +22,19 @@ namespace hiddenNT {
 	class ThemeParser
 	{
 	public:
-		ThemeParser(const std::string& filepath);
+		ThemeParser(const std::string& filepath, const int entries);
 		~ThemeParser();
 	public:
 		const Type& getType() const;
 		const std::string& getFilepath() const;
-		const std::array<Colors, 3>& getColors() const;
-		const std::array<sf::IntRect, 3>& getTexCoords() const;
+		const std::vector<Colors>& getColors() const;
+		const std::vector<sf::IntRect>& getTexCoords() const;
 	private:
 		Type                       m_type;
 		std::string                m_filepath;
-		std::array<Colors, 3>      m_colors;
-		std::array<sf::IntRect, 3> m_texCoords;
+		std::vector<Colors>        m_colors;
+		std::vector<sf::IntRect>   m_texCoords;
 		std::ifstream              m_file;
+		const int                  m_entries;
 	};
 }

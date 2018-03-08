@@ -3,7 +3,7 @@
 
 namespace nt {
 	PushButton::PushButton()
-		: Widget({ "Push_Button" })
+		: Widget("Push_Button")
 	{
 		setPosition(0, 0);
 		setSize(100, 100);
@@ -15,7 +15,7 @@ namespace nt {
 	}
 
 	PushButton::PushButton(const std::string& label)
-		: Widget({ "Push_Button" })
+		: Widget("Push_Button")
 	{
 		setPosition(0, 0);
 		setSize(100, 100);
@@ -28,7 +28,7 @@ namespace nt {
 	}
 
 	PushButton::PushButton(const std::string& label, const std::function<void()>& slot)
-		: Widget({ "Push_Button" })
+		: Widget("Push_Button")
 	{
 		setPosition(0, 0);
 		setSize(100, 100);
