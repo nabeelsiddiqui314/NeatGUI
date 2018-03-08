@@ -3,7 +3,7 @@
 #include <array>
 #include "window.h"
 #include "Resources.h"
-#include "InfoFile.h"
+#include "ThemeParser.h"
 
 namespace nt {
 	class Widget
@@ -21,7 +21,7 @@ namespace nt {
 			ANYWHERE
 		};
 	public:
-		Widget(const hiddenNT::InfoFile& infoFile);
+		Widget(const hiddenNT::ThemeParser& infoFile);
 		virtual ~Widget();
 	public:
 		virtual void update();

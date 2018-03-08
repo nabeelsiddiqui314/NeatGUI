@@ -2,7 +2,7 @@
 #include "Widget.h"
 
 namespace nt {
-	Widget::Widget(const hiddenNT::InfoFile& infoFile)
+	Widget::Widget(const hiddenNT::ThemeParser& infoFile)
 	{
 		switch (infoFile.getType()) {
 		case hiddenNT::COLORED:

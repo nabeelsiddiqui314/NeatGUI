@@ -19,11 +19,11 @@ namespace hiddenNT {
 		sf::Color border;
 	};
 
-	class InfoFile
+	class ThemeParser
 	{
 	public:
-		InfoFile(const std::string& filepath);
-		~InfoFile();
+		ThemeParser(const std::string& filepath);
+		~ThemeParser();
 	public:
 		const Type& getType() const;
 		const std::string& getFilepath() const;

@@ -153,7 +153,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="InfoFile.h" />
+    <ClInclude Include="ThemeParser.h" />
     <ClInclude Include="PushButton.h" />
     <ClInclude Include="ResourceLoader.h" />
     <ClInclude Include="Resources.h" />
@@ -165,7 +165,7 @@
     <ClInclude Include="window.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="InfoFile.cpp" />
+    <ClCompile Include="ThemeParser.cpp" />
     <ClCompile Include="NeatGui.cpp" />
     <ClCompile Include="PushButton.cpp" />
     <ClCompile Include="Resources.cpp" />

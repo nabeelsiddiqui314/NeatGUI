@@ -1,9 +1,9 @@
 #include "stdafx.h"
-#include "InfoFile.h"
+#include "ThemeParser.h"
 
 namespace hiddenNT {
-	InfoFile::InfoFile(const std::string& filepath) {
-		m_file.open("./Info/" + filepath + ".txt");
+	ThemeParser::ThemeParser(const std::string& filepath) {
+		m_file.open("./Theme/" + filepath + ".txt");
 
 		std::string temp;
 		while (std::getline(m_file, temp)) {
@@ -47,23 +47,23 @@ namespace hiddenNT {
 		}
 	}
 
-	const Type& InfoFile::getType() const {
+	const Type& ThemeParser::getType() const {
 		return m_type;
 	}
 
-	const std::string& InfoFile::getFilepath() const {
+	const std::string& ThemeParser::getFilepath() const {
 		return m_filepath;
 	}
 
-	const std::array<Colors, 3>& InfoFile::getColors() const {
+	const std::array<Colors, 3>& ThemeParser::getColors() const {
 		return m_colors;
 	}
 
-	const std::array<sf::IntRect, 3>& InfoFile::getTexCoords() const {
+	const std::array<sf::IntRect, 3>& ThemeParser::getTexCoords() const {
 		return m_texCoords;
 	}
 
-	InfoFile::~InfoFile()
+	ThemeParser::~ThemeParser()
 	{
 		m_file.clear();
 	}
