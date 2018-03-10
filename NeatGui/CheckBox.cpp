@@ -17,11 +17,11 @@ namespace nt {
 	}
 
 	const sf::Vector2f & CheckBox::getPosition() const {
-		
+		return {2.0f, 5.0f};
 	}
 
 	const sf::Vector2f & CheckBox::getSize() const {
-		
+		return { 2.0f, 5.0f };
 	}
 
 	void CheckBox::update() {

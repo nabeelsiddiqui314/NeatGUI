@@ -4,11 +4,11 @@
 namespace nt {
 	Widget::Widget(const std::string& themeFilePath)
 	{
-		ThemeParser themeFile(themeFilePath, 3);
+		auto& themeFile = ThemeContainer::get(themeFilePath);
 		switch (themeFile.getType()) {
 		case COLORED:
 			m_type = COLORED;
-			for(std::size_t i = 0; i < 3; i++)
+			for (std::size_t i = 0; i < 3; i++)
 				m_colors[i] = themeFile.getColors()[i];
 			m_body.setFillColor(m_colors[0].body);
 			m_body.setOutlineThickness(1);

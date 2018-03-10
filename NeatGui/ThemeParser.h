@@ -22,7 +22,7 @@ namespace nt {
 	class ThemeParser
 	{
 	public:
-		ThemeParser(const std::string& filepath, const int entries);
+		ThemeParser(const std::string& filepath);
 		~ThemeParser();
 	public:
 		const Type& getType() const;
@@ -35,6 +35,5 @@ namespace nt {
 		std::vector<Colors>        m_colors;
 		std::vector<sf::IntRect>   m_texCoords;
 		std::ifstream              m_file;
-		const int                  m_entries;
 	};
 }

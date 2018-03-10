@@ -4,6 +4,7 @@
 #include "window.h"
 #include "Resources.h"
 #include "ThemeParser.h"
+#include "ThemeContainer.h"
 
 namespace nt {
 	class Widget
@@ -40,10 +41,10 @@ namespace nt {
 		void enableDragY(bool shdEnable = true, bool callOverride = true);
 		void enableDrag(bool shdEnable = true, bool callOverride = true);
 	private:
-		sf::RectangleShape                   m_body;
-		State                                m_state = INACTIVE;
+		sf::RectangleShape         m_body;
+		State                      m_state = INACTIVE;
 		Type                       m_type;
-		std::array<sf::IntRect, 3>           m_texCoords;
+		std::array<sf::IntRect, 3> m_texCoords;
 		std::array<Colors, 3>      m_colors;
 
 		bool m_clickedLastFrame = false,
