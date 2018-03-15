@@ -7,8 +7,7 @@ namespace nt {
 	class Slider : public Widget, public Slot
 	{
 	public:
-		Slider(const int max, const int startVal = 0);
-		Slider(const int max, const std::function<void()>& slot, const int startVal = 0);
+		Slider(const int max = 100, const int startVal = 0, const std::function<void()>& slot = nullptr);
 		~Slider();
 	public:
 		void setPosition(int x, int y) override;

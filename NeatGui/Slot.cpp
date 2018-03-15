@@ -7,7 +7,8 @@ namespace nt {
 	}
 
 	void Slot::callSlot() {
-		m_slot();
+		if(m_slot != nullptr)
+			m_slot();
 	}
 
 	bool Slot::isSlotSet() {

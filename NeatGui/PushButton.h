@@ -7,9 +7,7 @@ namespace nt {
 	class PushButton : public Widget, public Slot
 	{
 	public:
-		PushButton();
-		PushButton(const std::string& label);
-		PushButton(const std::string& label, const std::function<void()>& slot);
+		PushButton(const std::string& label = "", const std::function<void()>& slot = nullptr);
 		~PushButton();
 	public:
 		void setLabel(const std::string& label);
