@@ -18,6 +18,7 @@ namespace nt {
 		void render() override;
 		const int getValue() const;
 		void setValue(const int value);
+		void setMax(const int max);
 	private:
 		sf::RectangleShape m_bar;
 		int m_prevPos;

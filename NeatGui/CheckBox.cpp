@@ -2,7 +2,7 @@
 #include "CheckBox.h"
 
 namespace nt {
-	CheckBox::CheckBox()
+	CheckBox::CheckBox(const Mode& mode)
 		: Widget("CheckBox")
 	{
 

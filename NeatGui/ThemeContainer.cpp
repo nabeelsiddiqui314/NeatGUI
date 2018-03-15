@@ -14,6 +14,21 @@ namespace nt {
 		}
 	}
 
+	void ThemeContainer::applyToOne(const std::string& name, sf::RectangleShape& rect) {
+		auto& theme = get(name);
+		switch (theme.getType()) {
+		case COLORED:
+			rect.setFillColor(theme.getColors()[0].body);
+			rect.setOutlineThickness(1);
+			rect.setOutlineColor(theme.getColors()[0].border);
+			break;
+		case TEXTURED:
+			rect.setTexture(&Resources::get().textures.get(theme.getFilepath()));
+			rect.setTextureRect(theme.getTexCoords()[0]);
+			break;
+		}
+	}
+
 	ThemeContainer::~ThemeContainer()
 	{
 	}

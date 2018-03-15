@@ -10,9 +10,7 @@ namespace nt {
 		m_bar.setSize({ 400.0f, 5.0f });
 		setSize(400, 40);
 		setPosition(50, 50);
-		m_bar.setFillColor(sf::Color(189, 189, 189));
-		m_bar.setOutlineThickness(1);
-		m_bar.setOutlineColor(sf::Color::Black);
+		ThemeContainer::applyToOne("SliderBar", m_bar);
 		setValue(startVal);
 		m_prevPos = Widget::getPosition().x;
 		setSlot(slot);
@@ -72,6 +70,10 @@ namespace nt {
 		float offset = m_bar.getPosition().x - Widget::getSize().x / 2;
 		float pos = (value * m_bar.getSize().x) / m_max;
 		Widget::setPosition(offset + pos, Widget::getPosition().y);
+	}
+
+	void Slider::setMax(const int max) {
+		m_max = max;
 	}
 
 	Slider::~Slider()
