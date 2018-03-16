@@ -5,31 +5,37 @@ namespace nt {
 	CheckBox::CheckBox(const Mode& mode)
 		: Widget("CheckBox")
 	{
-
+		ThemeContainer::applyToOne("CheckMark", m_checkMark);
+		m_isActive = mode == ENABLED ? true : false;
+		setSize(10, 10);
+		setPosition(600, 400);
 	}
 
 	void CheckBox::setPosition(int x, int y) {
-
+		Widget::setPosition(x, y);
+		m_checkMark.setPosition(x, y);
 	}
 
 	void CheckBox::setSize(int x, int y) {
-
-	}
-
-	const sf::Vector2f & CheckBox::getPosition() const {
-		return {2.0f, 5.0f};
-	}
-
-	const sf::Vector2f & CheckBox::getSize() const {
-		return { 2.0f, 5.0f };
+		Widget::setSize(x, y);
+		m_checkMark.setSize({ (float)x, (float)y });
 	}
 
 	void CheckBox::update() {
-
+		Widget::update();
+		if (isReleaseClicked(IN)) {
+			m_isActive = !m_isActive;
+		}
 	}
 
 	void CheckBox::render() {
+		Widget::render();
+		if(m_isActive)
+			window::get()->draw(m_checkMark);
+	}
 
+	bool CheckBox::isActive() const {
+		return m_isActive;
 	}
 
 	CheckBox::~CheckBox() {
