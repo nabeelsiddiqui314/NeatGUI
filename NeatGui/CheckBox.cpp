@@ -6,7 +6,7 @@ namespace nt {
 		: Widget("CheckBox")
 	{
 		ThemeContainer::applyToOne("CheckMark", m_checkMark);
-		m_isActive = mode == ENABLED ? true : false;
+		m_isActive = mode == Mode::ENABLED ? true : false;
 		setSize(10, 10);
 		setPosition(600, 400);
 	}

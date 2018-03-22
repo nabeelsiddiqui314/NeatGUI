@@ -13,7 +13,8 @@ namespace nt {
 		enum State {
 			INACTIVE,
 			HOVERED,
-			PRESSED
+			PRESSED,
+			DISABLED
 		};
 	protected:
 		enum Bounds {
@@ -32,6 +33,9 @@ namespace nt {
 		virtual void setPosition(int x, int y);
 		virtual const sf::Vector2f& getSize() const;
 		virtual const sf::Vector2f& getPosition() const;
+
+		void setEnabled(bool shdEnable);
+		bool isEnabled() const;
 	protected:
 		bool isHovered(const Bounds& bounds = Bounds::IN);
 		bool isPressed(const Bounds &bounds = Bounds::IN);
@@ -44,14 +48,15 @@ namespace nt {
 		sf::RectangleShape         m_body;
 		State                      m_state = INACTIVE;
 		Type                       m_type;
-		std::array<sf::IntRect, 3> m_texCoords;
-		std::array<Colors, 3>      m_colors;
+		std::array<sf::IntRect, 4> m_texCoords;
+		std::array<Colors, 4>      m_colors;
 
 		bool m_clickedLastFrame = false,
-		     m_isClickedNow = false,
-		     m_isDragEnabledX = false,
-			 m_isDragEnabledY = false,
-		     m_callOverrideForDrag = true;
+			m_isClickedNow = false,
+			m_isDragEnabledX = false,
+			m_isDragEnabledY = false,
+			m_callOverrideForDrag = true,
+			m_enabled = true;
 
 		sf::Vector2f m_dragMouseOffset;
 	};

@@ -8,7 +8,7 @@ namespace nt {
 		switch (themeFile.getType()) {
 		case COLORED:
 			m_type = COLORED;
-			for (std::size_t i = 0; i < 3; i++)
+			for (std::size_t i = 0; i < 4; i++)
 				m_colors[i] = themeFile.getColors()[i];
 			m_body.setFillColor(m_colors[0].body);
 			m_body.setOutlineThickness(1);
@@ -16,7 +16,7 @@ namespace nt {
 			break;
 		case TEXTURED:
 			m_type = TEXTURED;
-			for (std::size_t i = 0; i < 3; i++)
+			for (std::size_t i = 0; i < 4; i++)
 				m_texCoords[i] = themeFile.getTexCoords()[i];
 			m_body.setTexture(&Resources::get().textures.get(themeFile.getFilepath()));
 			m_body.setTextureRect(m_texCoords[0]);
@@ -25,6 +25,8 @@ namespace nt {
 	}
 
 	bool Widget::isHovered(const Bounds& bounds) {
+		if (!m_enabled)
+			return false;
 		auto mousePos = (sf::Vector2f)sf::Mouse::getPosition(*window::get());
 		bool Val = m_body.getGlobalBounds().contains(mousePos);
 		switch (bounds) {
@@ -74,7 +76,10 @@ namespace nt {
 	}
 
 	void Widget::update() {
-		if (!isHovered() && !isPressed()) {
+		if (!m_enabled) {
+			m_state = State::DISABLED;
+		}
+		else if (!isHovered() && !isPressed()) {
 			m_state = State::INACTIVE;
 		}
 		else if (isHovered() && !isPressed()) {
@@ -95,7 +100,6 @@ namespace nt {
 			break;
 		}
 
-		m_clickedLastFrame = m_isClickedNow;
 		if (m_isDragEnabledX || m_isDragEnabledY) {
 			auto mousePos = (sf::Vector2f)sf::Mouse::getPosition(*nt::window::get());
 			auto bodyPos = m_body.getPosition();
@@ -117,6 +121,7 @@ namespace nt {
 				}
 			}
 		}
+		m_clickedLastFrame = m_isClickedNow;
 	}
 
 	void Widget::render() {
@@ -139,6 +144,14 @@ namespace nt {
 
 	const sf::Vector2f& Widget::getPosition() const {
 		return m_body.getPosition();
+	}
+
+	void Widget::setEnabled(bool shdEnable) {
+		m_enabled = shdEnable;
+	}
+
+	bool Widget::isEnabled() const {
+		return m_enabled;
 	}
 
 	Widget::~Widget()

@@ -2,14 +2,14 @@
 #include "Widget.h"
 
 namespace nt {
-	enum Mode {
+	enum class Mode {
 		ENABLED,
 		DISABLED
 	};
 	class CheckBox : public Widget
 	{
 	public:
-		CheckBox(const Mode& mode = DISABLED);
+		CheckBox(const Mode& mode = Mode::DISABLED);
 		~CheckBox();
 	public:
 		void setPosition(int x, int y) override;
