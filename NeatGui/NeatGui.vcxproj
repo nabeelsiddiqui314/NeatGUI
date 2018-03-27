@@ -154,6 +154,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="CheckBox.h" />
+    <ClInclude Include="Box.h" />
     <ClInclude Include="ThemeContainer.h" />
     <ClInclude Include="ThemeParser.h" />
     <ClInclude Include="PushButton.h" />
@@ -168,6 +169,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CheckBox.cpp" />
+    <ClCompile Include="Box.cpp" />
     <ClCompile Include="ThemeContainer.cpp" />
     <ClCompile Include="ThemeParser.cpp" />
     <ClCompile Include="NeatGui.cpp" />
