@@ -11,7 +11,7 @@ namespace nt {
 	{
 	private:
 		enum State {
-			INACTIVE,
+			INACTIVE = 0,
 			HOVERED,
 			PRESSED,
 			DISABLED
@@ -36,6 +36,7 @@ namespace nt {
 
 		void setEnabled(bool shdEnable);
 		bool isEnabled() const;
+		void setInactive();
 	protected:
 		bool isHovered(const Bounds& bounds = Bounds::IN);
 		bool isPressed(const Bounds &bounds = Bounds::IN);

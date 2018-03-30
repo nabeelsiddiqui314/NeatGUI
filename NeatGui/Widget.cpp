@@ -154,6 +154,20 @@ namespace nt {
 		return m_enabled;
 	}
 
+	void Widget::setInactive() {
+		m_state = INACTIVE;
+		switch (m_type)
+		{
+		case COLORED:
+			m_body.setFillColor(m_colors[0].body);
+			m_body.setOutlineColor(m_colors[0].border);
+			break;
+		case TEXTURED:
+			m_body.setTextureRect(m_texCoords[0]);
+			break;
+		}
+	}
+
 	Widget::~Widget()
 	{
 	}

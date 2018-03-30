@@ -7,11 +7,26 @@ namespace nt {
 	, m_spacing(spacing)
 	, m_border(border)
 	{
-		m_box.setSize({ 50.0f, 50.0f});
-		m_box.setPosition(0, 0);
+		setSize(50, 50);
+		setPosition(0, 0);
+
 		ThemeContainer::applyToOne("Box", m_box);
+		m_borderBox.setFillColor(sf::Color::Transparent);
+		m_borderBox.setOutlineThickness(1);
+		m_borderBox.setOutlineColor(ThemeContainer::get("Box").getColors()[0].border);
 		m_nextPos.x = m_box.getPosition().x + m_border;
 		m_nextPos.y = m_box.getPosition().y + m_border;
+	}
+
+	void Box::resetView() {
+		float screenWidth = window::get()->getSize().x;
+		float screenHeight = window::get()->getSize().y;
+		auto boxPos = sf::Vector2f(m_box.getPosition().x - 1, m_box.getPosition().y - 1);
+		auto boxSize = sf::Vector2f(m_box.getSize().x + 2, m_box.getSize().y + 2);
+
+		m_contentArea.reset(sf::FloatRect(boxPos, boxSize));
+		m_contentArea.setViewport(sf::FloatRect(boxPos.x / screenWidth, boxPos.y / screenHeight,
+			boxSize.x / screenWidth, boxSize.y / screenHeight));
 	}
 
 	void Box::setPosition(int x, int y) {
@@ -27,10 +42,14 @@ namespace nt {
 			}
 		}
 		m_box.setPosition(x, y);
+		m_borderBox.setPosition(x, y);
+		resetView();
 	}
 
 	void Box::setSize(int x, int y) {
 		m_box.setSize({(float)x, (float)y});
+		m_borderBox.setSize({ (float)x, (float)y });
+		resetView();
 	}
 
 	const sf::Vector2f& Box::getPosition() const {
@@ -67,14 +86,26 @@ namespace nt {
 	}
 
 	void Box::update() {
-		for (auto& child : m_children)
-			child->update();
+		bool hoveredNow = m_box.getGlobalBounds().contains((sf::Vector2f)sf::Mouse::getPosition(*window::get()));
+		if (hoveredNow) {
+			for (auto& child : m_children)
+				child->update();
+		}
+		else if (m_hoveredLastFrame) {
+			for (auto& child : m_children) {
+				child->setInactive();
+			}
+		}
+		m_hoveredLastFrame = hoveredNow;
 	}
 
 	void Box::render() {
+		window::get()->setView(m_contentArea);
 		window::get()->draw(m_box);
 		for (auto& child : m_children)
 			child->render();
+		window::get()->draw(m_borderBox);
+		window::get()->setView(window::get()->getDefaultView());
 	}
 
 	Box::~Box()

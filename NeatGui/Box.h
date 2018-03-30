@@ -21,11 +21,16 @@ namespace nt {
 		void update();
 		void render();
 	private:
-		sf::RectangleShape m_box;
+		void resetView();
+	private:
+		sf::RectangleShape   m_box;
+		sf::RectangleShape   m_borderBox;
 		std::vector<Widget*> m_children;
-		Layout m_layout;
-		int m_spacing;
-		int m_border;
-		sf::Vector2i m_nextPos;
+		Layout               m_layout;
+		int                  m_spacing;
+		int                  m_border;
+		sf::Vector2i         m_nextPos;
+		sf::View             m_contentArea;
+		bool                 m_hoveredLastFrame;
 	};
 }
