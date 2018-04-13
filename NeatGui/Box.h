@@ -24,7 +24,6 @@ namespace nt {
 		void resetView();
 	private:
 		sf::RectangleShape   m_box;
-		sf::RectangleShape   m_borderBox;
 		std::vector<Widget*> m_children;
 		Layout               m_layout;
 		int                  m_spacing;

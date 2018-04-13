@@ -11,9 +11,6 @@ namespace nt {
 		setPosition(0, 0);
 
 		ThemeContainer::applyToOne("Box", m_box);
-		m_borderBox.setFillColor(sf::Color::Transparent);
-		m_borderBox.setOutlineThickness(1);
-		m_borderBox.setOutlineColor(ThemeContainer::get("Box").getColors()[0].border);
 		m_nextPos.x = m_box.getPosition().x + m_border;
 		m_nextPos.y = m_box.getPosition().y + m_border;
 	}
@@ -42,13 +39,11 @@ namespace nt {
 			}
 		}
 		m_box.setPosition(x, y);
-		m_borderBox.setPosition(x, y);
 		resetView();
 	}
 
 	void Box::setSize(int x, int y) {
 		m_box.setSize({(float)x, (float)y});
-		m_borderBox.setSize({ (float)x, (float)y });
 		resetView();
 	}
 
@@ -104,7 +99,6 @@ namespace nt {
 		window::get()->draw(m_box);
 		for (auto& child : m_children)
 			child->render();
-		window::get()->draw(m_borderBox);
 		window::get()->setView(window::get()->getDefaultView());
 	}
 
