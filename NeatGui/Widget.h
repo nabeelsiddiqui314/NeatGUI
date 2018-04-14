@@ -57,6 +57,7 @@ namespace nt {
 			m_isDragEnabledX = false,
 			m_isDragEnabledY = false,
 			m_callOverrideForDrag = true,
+			m_isDragging = false,
 			m_enabled = true;
 
 		sf::Vector2f m_dragMouseOffset;

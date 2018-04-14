@@ -103,10 +103,18 @@ namespace nt {
 		if (m_isDragEnabledX || m_isDragEnabledY) {
 			auto mousePos = (sf::Vector2f)sf::Mouse::getPosition(*nt::window::get());
 			auto bodyPos = m_body.getPosition();
-			if (isJustClicked())
+
+			if (isJustClicked()) {
 				m_dragMouseOffset = { mousePos.x - bodyPos.x,
-						     mousePos.y - bodyPos.y };
-			if (m_state == State::PRESSED) {
+							 mousePos.y - bodyPos.y };
+				m_isDragging = true;
+			}
+
+			if (isReleaseClicked(ANYWHERE)) {
+				m_isDragging = false;
+			}
+
+			if (m_isDragging) {
 				if (m_isDragEnabledX) {
 					if (m_callOverrideForDrag) 
 						setPosition(mousePos.x - m_dragMouseOffset.x, m_body.getPosition().y);
