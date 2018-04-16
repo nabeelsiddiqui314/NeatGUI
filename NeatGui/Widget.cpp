@@ -24,11 +24,36 @@ namespace nt {
 		}
 	}
 
+	void Widget::addBody(sf::RectangleShape& rect) {
+		m_body2rect = &rect;
+		m_body2text = nullptr;
+	}
+
+	void Widget::addBody(sf::Text& text) {
+		m_body2text = &text;
+		m_body2rect = nullptr;
+	}
+
 	bool Widget::isHovered(const Bounds& bounds) {
 		if (!m_enabled)
 			return false;
 		auto mousePos = (sf::Vector2f)sf::Mouse::getPosition(*window::get());
-		bool Val = m_body.getGlobalBounds().contains(mousePos);
+		bool isSecondHovered = false;
+
+		if (m_body2rect == nullptr && m_body2text == nullptr) {
+			isSecondHovered = false;
+		}
+		else if (m_body2rect != nullptr && m_body2rect->getGlobalBounds().contains(mousePos)) {
+			isSecondHovered = true;
+		}
+		else if (m_body2text != nullptr && m_body2text->getGlobalBounds().contains(mousePos)) {
+			isSecondHovered = true;
+		}
+		else {
+			isSecondHovered = false;
+		}
+
+		bool Val = m_body.getGlobalBounds().contains(mousePos) || isSecondHovered;
 		switch (bounds) {
 		case ANYWHERE:
 			return true;

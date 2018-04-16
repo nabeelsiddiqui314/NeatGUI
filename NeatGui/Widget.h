@@ -5,6 +5,7 @@
 #include "Resources.h"
 #include "ThemeParser.h"
 #include "ThemeContainer.h"
+#include <functional>
 
 namespace nt {
 	class Widget
@@ -38,6 +39,8 @@ namespace nt {
 		bool isEnabled() const;
 		void setInactive();
 	protected:
+		void addBody(sf::RectangleShape& rect);
+		void addBody(sf::Text& text);
 		bool isHovered(const Bounds& bounds = Bounds::IN);
 		bool isPressed(const Bounds &bounds = Bounds::IN);
 		bool isJustClicked(const Bounds& bounds = Bounds::IN);
@@ -47,6 +50,8 @@ namespace nt {
 		void enableDrag(bool shdEnable = true, bool callOverride = true);
 	private:
 		sf::RectangleShape         m_body;
+		sf::RectangleShape*        m_body2rect;
+		sf::Text*                  m_body2text;
 		State                      m_state = INACTIVE;
 		Type                       m_type;
 		std::array<sf::IntRect, 4> m_texCoords;
