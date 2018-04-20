@@ -55,28 +55,23 @@ namespace nt {
 		return m_box.getSize();
 	}
 
-	void Box::add(Widget* child, bool autoPosition) {
+	void Box::add(Widget* child, int xOffset, int yOffset) {
 		m_children.emplace_back(child);
-		child->setPosition(m_nextPos.x, m_nextPos.y);
+		child->setPosition(m_nextPos.x + xOffset, m_nextPos.y + yOffset);
 
 		auto& boxPos = m_box.getPosition();
 		auto& boxSize = m_box.getSize();
 		auto& childPos = child->getPosition();
 		auto& childSize = child->getSize();
 
-		if (autoPosition) {
-			switch (m_layout) {
-			case Layout::VERTICAL:
-				m_nextPos.x = boxPos.x + m_border;
-				m_nextPos.y = childPos.y + childSize.y + m_spacing;
-				break;
-			case Layout::HORIZONTAL:
-				m_nextPos.x = childPos.x + childSize.x + m_spacing;
-				m_nextPos.y = boxPos.y + m_border;
-			}
-		}
-		else {
-			child->setPosition(child->getPosition().x + m_box.getPosition().x, child->getPosition().y + m_box.getPosition().y);
+		switch (m_layout) {
+		case Layout::VERTICAL:
+			m_nextPos.x = boxPos.x + m_border;
+			m_nextPos.y = childPos.y + childSize.y + m_spacing;
+			break;
+		case Layout::HORIZONTAL:
+			m_nextPos.x = childPos.x + childSize.x + m_spacing;
+			m_nextPos.y = boxPos.y + m_border;
 		}
 	}
 

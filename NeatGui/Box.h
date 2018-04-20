@@ -17,7 +17,7 @@ namespace nt {
 		void setSize(int x, int y);
 		const sf::Vector2f& getPosition() const;
 		const sf::Vector2f& getSize() const;
-		void add(Widget* child, bool autoPosition);
+		void add(Widget* child, int xOffset = 0, int yOffset = 0);
 		void update();
 		void render();
 	private:
