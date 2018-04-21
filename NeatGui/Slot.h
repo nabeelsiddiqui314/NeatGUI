@@ -8,6 +8,5 @@ namespace nt {
 	public:
 		void setSlot(const std::function<void()>& slot);
 		void callSlot();
-		bool isSlotSet();
 	};
 }

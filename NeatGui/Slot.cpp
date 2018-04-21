@@ -10,8 +10,4 @@ namespace nt {
 		if(m_slot != nullptr)
 			m_slot();
 	}
-
-	bool Slot::isSlotSet() {
-		return m_slot != nullptr;
-	}
 }

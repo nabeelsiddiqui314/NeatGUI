@@ -49,7 +49,7 @@ namespace nt {
 		if (sliderPosX < barPos)
 			Widget::setPosition(barPos - sliderCenter, sliderPosY);
 
-		if (Widget::getPosition().x != m_prevPos && isSlotSet())
+		if (Widget::getPosition().x != m_prevPos)
 			callSlot();
 		m_prevPos = Widget::getPosition().x;
 	}
