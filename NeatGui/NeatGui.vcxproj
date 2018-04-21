@@ -155,6 +155,7 @@
   <ItemGroup>
     <ClInclude Include="CheckBox.h" />
     <ClInclude Include="Box.h" />
+    <ClInclude Include="Label.h" />
     <ClInclude Include="StaticElement.h" />
     <ClInclude Include="ThemeContainer.h" />
     <ClInclude Include="ThemeParser.h" />
@@ -171,6 +172,7 @@
   <ItemGroup>
     <ClCompile Include="CheckBox.cpp" />
     <ClCompile Include="Box.cpp" />
+    <ClCompile Include="Label.cpp" />
     <ClCompile Include="StaticElement.cpp" />
     <ClCompile Include="ThemeContainer.cpp" />
     <ClCompile Include="ThemeParser.cpp" />

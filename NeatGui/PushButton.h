@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include "Widget.h"
 #include "Slot.h"
+#include "Label.h"
 
 namespace nt {
 	class PushButton : public Widget, public Slot
@@ -17,8 +18,6 @@ namespace nt {
 		void setPosition(int x, int y) override;
 		void setSize(int x, int y) override;
 	private:
-		void repositionText();
-	private:
-		sf::Text m_label;
+		Label m_label;
 	};
 }

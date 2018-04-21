@@ -8,21 +8,19 @@ namespace nt {
 		setPosition(0, 0);
 		setSize(100, 100);
 		m_label.setCharacterSize(14u);
-		m_label.setString("Text");
-		m_label.setFillColor(sf::Color::Black);
+		m_label.setText("Text");
+		m_label.setColor(sf::Color::Black);
 		m_label.setFont(Resources::get().fonts.get("setME"));
-		repositionText();
 		setLabel(label);
 		setSlot(slot);
 	}
 
 	void PushButton::setLabel(const std::string& label) {
-		m_label.setString(label);
-		repositionText();
+		m_label.setText(label);
 	}
 
 	const std::string& PushButton::getLabel() const {
-		return m_label.getString();
+		return m_label.getText();
 	}
 
 	void PushButton::update() {
@@ -34,22 +32,17 @@ namespace nt {
 
 	void PushButton::render() {
 		Widget::render();
-		window::get()->draw(m_label);
-	}
-
-	void PushButton::repositionText() {
-		m_label.setPosition(getPosition().x + (getSize().x / 2) - (m_label.getGlobalBounds().width / 2),
-			getPosition().y + (getSize().y / 2) - (m_label.getGlobalBounds().height / 2) - 2);
+		m_label.render();
 	}
 
 	void PushButton::setPosition(int x, int y) {
 		Widget::setPosition(x, y);
-		repositionText();
+		m_label.setPosition(x, y);
 	}
 
 	void PushButton::setSize(int x, int y) {
 		Widget::setSize(x, y);
-		repositionText();
+		m_label.setSize(x, y);
 	}
 
 	PushButton::~PushButton()

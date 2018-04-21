@@ -2,13 +2,14 @@
 #include "CheckBox.h"
 
 namespace nt {
-	CheckBox::CheckBox(const Mode& mode)
+	CheckBox::CheckBox(const Mode& mode, const std::function<void()>& slot)
 		: Widget("CheckBox")
 	{
 		ThemeContainer::applyToOne("CheckMark", m_checkMark);
 		m_isActive = mode == Mode::ENABLED ? true : false;
 		setSize(10, 10);
 		setPosition(600, 400);
+		setSlot(slot);
 	}
 
 	void CheckBox::setPosition(int x, int y) {
@@ -25,6 +26,7 @@ namespace nt {
 		Widget::update();
 		if (isReleaseClicked(IN)) {
 			m_isActive = !m_isActive;
+			callSlot();
 		}
 	}
 
