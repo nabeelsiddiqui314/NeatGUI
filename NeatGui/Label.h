@@ -19,8 +19,9 @@ namespace nt {
 
 		const std::string& getText() const;
 	private:
-		void repositionText();
+		void resetPosition();
 	private:
 		sf::Text m_label;
+		sf::View m_textArea;
 	};
 }
