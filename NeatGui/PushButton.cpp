@@ -8,7 +8,7 @@ namespace nt {
 		setPosition(0, 0);
 		setSize(100, 100);
 		m_label.setCharacterSize(14u);
-		m_label.setText("Text");
+		m_label.setText("Push_Button");
 		m_label.setColor(sf::Color::Black);
 		m_label.setFont(Resources::get().fonts.get("setME"));
 		setLabel(label);
