@@ -61,8 +61,8 @@ namespace nt {
 
 		auto& boxPos = m_box.getPosition();
 		auto& boxSize = m_box.getSize();
-		auto& childPos = child->getPosition();
-		auto& childSize = child->getSize();
+		auto childPos = child->getPosition();
+		auto childSize = child->getSize();
 
 		switch (m_layout) {
 		case Layout::VERTICAL:
